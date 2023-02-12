@@ -42,3 +42,63 @@ approximation, randomization concepts are introduced. The rSVD factorization is 
 2. Cb and Cr from YCbCr
 3. a and b from CIELab
 
+### Colour Space Analysis
+![image](https://user-images.githubusercontent.com/120790343/218321118-71a7c786-7b73-45df-b7da-52cc2c033ed3.png)
+![image](https://user-images.githubusercontent.com/120790343/218321194-6d7a7dda-cd9e-4d42-b8a6-b752d7468bba.png)
+![image](https://user-images.githubusercontent.com/120790343/218321209-7497b633-6a69-4723-a385-580563ad9b25.png)  
+<p style='text-align: justify;'>We can see from this that salient regions in an image have varying degrees of apparentness in 
+different color channels. The salient regions are more prominent in more than one color channel. 
+From the above analysis, we observe that salient regions are clearer in b from CIELab, V from 
+YUV and Cr from YCbCr channels for the image that have clear distinct differentiation between 
+salient part and background. Similarly, the salient regions are clearer in a from CIELab, U from 
+YUV and Cb from YCbCr channels for the image that have a blurred background </p>
+   
+### Luminance based DMD representation of images
+![image](https://user-images.githubusercontent.com/120790343/218321277-48193252-42ea-4d3a-a51e-9ee6ed63c39e.png)
+
+<p style='text-align: justify;'>We can observe that the SVD-reconstructed images have more salient features. Also, as the number of singular values used for reconstruction increases, the salient region becomes clearer while the background remains relatively static after a set of iterations. </p>
+    
+### Salient region detection using dynamic mode decomposition  
+
+
+#### Color based saliency map
+![image](https://user-images.githubusercontent.com/120790343/218321545-6f95e6d7-c376-4fba-bb09-b83fb11bfd97.png)
+<br>
+<br>
+#### Luminance based saliency map
+![image](https://user-images.githubusercontent.com/120790343/218321640-3de8f0e3-ccd9-4a71-9b3c-750c9358a529.png)
+<br>
+<br>
+### Qualitative Analysis
+![image](https://user-images.githubusercontent.com/120790343/218321753-1bec54c4-2059-4fbc-a235-b5a9b9a71aee.png)
+![image](https://user-images.githubusercontent.com/120790343/218321765-1c9eef43-419b-4f0f-bb1e-5dc45b5f8f87.png)
+### Datasets
+<p style='text-align: justify;'> In this project, we have used the ECSSD (Extended Complex Scene Saliency Dataset). It consists of 1000 images, which includes many semantically meaningful and structurally complex images for evaluation. The images that fall into the category of natural images are present here. These images have textures and structures common to real world images. Several examples with their masks are provided. We used 100 random images from this dataset for quantitative comparison.</p>  
+
+### Quantitative Analysis
+#### Precision - recall [PR]
+![image](https://user-images.githubusercontent.com/120790343/218322006-8beec0e7-142e-41dc-a833-6cf0c70aa635.png)
+<br>
+<br>
+#### F-measure
+![image](https://user-images.githubusercontent.com/120790343/218322159-cd3fc7af-e7d4-47c5-b960-9d1ea289b600.png)
+<br>
+<br>
+#### Mean absolute error
+![image](https://user-images.githubusercontent.com/120790343/218322189-47328b8e-22ab-479c-8df7-09fc4f8cab84.png)
+#### Area under ROC curve
+**_Standard DMD:_**  
+
+![image](https://user-images.githubusercontent.com/120790343/218322842-fd1c90c3-143e-419f-8762-23f6e7f1e552.png)
+<br>
+<br>
+**_rSVD-DMD:_**  
+
+![image](https://user-images.githubusercontent.com/120790343/218322886-6cd5d882-0176-4bc2-a593-86da2e692961.png)
+
+
+### Failure cases:
+<p style='text-align: justify;'> The proposed method in this project is especially targeted for the natural scenes. It widely uses the general information of the images and is suboptimal for the images with highly textures background having the same color distribution as foreground. This method fails when the images have a highly structured background with the same color distributions as the foreground. The dynamic mode decomposition method captures the difference between consecutive columns in the data matrix and the modes bounded away from the origin are detected as the salient region. In scenarios where the background and foreground distributions in the image are highly overlapping and the background is highly textured, the color and intensity-based image representations become undesirable for the application of DMD.</p>  
+
+### Conclusion  
+From the experiments performed we can conclude that standard DMD offers satisfactory performance. The worst performance is obtained for rSVD-DMD because it is affected by the fluctuations and uncertainties in the measured data.
